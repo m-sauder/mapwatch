@@ -11,6 +11,7 @@ class MainPageWidget extends StatefulWidget {
 
 class _HomePageState extends State<MainPageWidget> {
   final LatLng initialLocation = LatLng(44.17, -81.64);
+  final double initialZoom = 13.0;
   late final MapController _mapController;
 
   @override
@@ -21,6 +22,7 @@ class _HomePageState extends State<MainPageWidget> {
 
   void _onGpsIconPressed() {
     this._mapController.rotate(0);
+    this._mapController.move(initialLocation, initialZoom);
   }
 
   //UI of the Main Page
@@ -45,7 +47,7 @@ class _HomePageState extends State<MainPageWidget> {
               mapController: this._mapController,
               options: MapOptions(
                 center: this.initialLocation,
-                zoom: 13.0,
+                zoom: this.initialZoom,
                 maxZoom: 18.3,
                 minZoom: 17.0,
               ),
