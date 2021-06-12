@@ -4,7 +4,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location/flutter_map_location.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mapwatch/components/custom_alert_dialog.dart';
-import 'package:mapwatch/components/floating_dialog.dart';
 import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
