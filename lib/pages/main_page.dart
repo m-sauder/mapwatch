@@ -25,22 +25,44 @@ class _HomePageState extends State<MainPageWidget> {
         panel: Center(
           child: Text('hey asshole'),
         ),
-        body: new FlutterMap(
-          options: new MapOptions(
-            center: new LatLng(44.17, -81.64),
-            zoom: 13.0,
-          ),
-          layers: [
-            new TileLayerOptions(urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", subdomains: ['a', 'b', 'c']),
-            new MarkerLayerOptions(
-              markers: [
-                new Marker(
-                  width: 80.0,
-                  height: 80.0,
-                  point: new LatLng(51.5, -0.09),
-                  builder: (ctx) => new Container(),
+        body: Stack(
+          children: [
+            FlutterMap(
+              options: MapOptions(
+                center: LatLng(44.17, -81.64),
+                zoom: 13.0,
+              ),
+              layers: [
+                TileLayerOptions(urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", subdomains: ['a', 'b', 'c']),
+                MarkerLayerOptions(
+                  markers: [
+                    Marker(
+                      width: 80.0,
+                      height: 80.0,
+                      point: LatLng(51.5, -0.09),
+                      builder: (ctx) => Container(),
+                    ),
+                  ],
                 ),
               ],
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: EdgeInsets.only(top: 40, right: 10),
+                child: Container(
+                  width: 25,
+                  height: 25,
+                  child: FloatingActionButton(
+                    child: Icon(
+                      Icons.gps_fixed,
+                      size: 18,
+                    ),
+                    onPressed: () {},
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
