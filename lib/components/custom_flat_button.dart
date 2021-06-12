@@ -23,7 +23,7 @@ class CustomFlatButton extends StatelessWidget {
           onPressed: this.onPressed,
           child: Text(
             this.label,
-            style: TextStyle(color: CustomColorScheme.grey),
+            style: TextStyle(color: CustomColorScheme.black),
           ),
           style: ButtonStyle(
             padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15)),
@@ -32,7 +32,7 @@ class CustomFlatButton extends StatelessWidget {
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
-                side: BorderSide(color: CustomColorScheme.grey),
+                side: BorderSide(color: CustomColorScheme.black),
               ),
             ),
           ),
