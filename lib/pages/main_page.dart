@@ -11,7 +11,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mapwatch/providers/main_providers.dart';
 
 class MainPageWidget extends HookWidget {
-  final LatLng initialLocation = LatLng(44.17, -81.64);
+  final LatLng initialLocation = LatLng(43.9113534, -77.2743354);
   final double initialZoom = 13.0;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final CollectionReference coordinates = FirebaseFirestore.instance.collection("coordinates");
