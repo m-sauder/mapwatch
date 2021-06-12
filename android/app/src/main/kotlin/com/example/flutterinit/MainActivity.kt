@@ -1,4 +1,4 @@
-package com.example.flutterinit
+package com.example.mapwatch
 
 import io.flutter.embedding.android.FlutterActivity
 

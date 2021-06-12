@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutterinit/constants.dart';
-import 'package:flutterinit/pages/main_page.dart';
+import 'package:mapwatch/constants.dart';
+import 'package:mapwatch/pages/main_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {

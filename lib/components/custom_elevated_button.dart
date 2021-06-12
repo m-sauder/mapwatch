@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutterinit/constants.dart';
+import 'package:mapwatch/constants.dart';
 
 class CustomElevatedButton extends StatelessWidget {
   /// Text to show on button
