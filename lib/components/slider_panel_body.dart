@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mapwatch/components/custom_elevated_button.dart';
 import 'package:mapwatch/components/favourite_cards.dart';
 import 'package:mapwatch/components/guide_cards.dart';
 import 'package:mapwatch/components/submission_status_card.dart';
 import 'package:mapwatch/constants.dart';
+import 'package:mapwatch/providers/main_providers.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class SliderPanelBody extends StatefulWidget {
-  @override
-  _SliderPanelBodyState createState() => _SliderPanelBodyState();
-}
-
-class _SliderPanelBodyState extends State<SliderPanelBody> {
+class SliderPanelBody extends HookWidget {
   List<Widget> generateFavouriteCards() {
     return [
       FavouriteCard(
@@ -103,13 +102,16 @@ class _SliderPanelBodyState extends State<SliderPanelBody> {
     ];
   }
 
-  void onSubmitSpottingPressed() {
-    // TODO: Implement this later
-    // Navigator.pop(context);
+  void onSubmitSpottingPressed(PanelController pc, BuildContext context) async {
+    await pc.close();
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Hold to pin a location on the map!')));
+    context.read(isAddingNewCoordinate).state = true;
   }
 
   @override
   Widget build(BuildContext context) {
+    PanelController pc = useProvider(panelControllerProvider).state;
+
     return Container(
       child: Column(
         children: [
@@ -154,7 +156,7 @@ class _SliderPanelBodyState extends State<SliderPanelBody> {
                   style: Constants.mainFont.copyWith(fontSize: 24),
                 ),
                 SizedBox(height: 21),
-                CustomElevatedButton(label: 'Submit a Spotting', onPressed: this.onSubmitSpottingPressed),
+                CustomElevatedButton(label: 'Submit a Spotting', onPressed: () => this.onSubmitSpottingPressed(pc, context)),
                 SizedBox(height: 30),
                 Text(
                   'Submissions Status',
