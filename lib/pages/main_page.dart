@@ -4,7 +4,9 @@ import 'package:flutter_map_location/flutter_map_location.dart';
 import 'package:mapwatch/components/custom_alert_dialog.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:mapwatch/models/Coordinate.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MainPageWidget extends StatefulWidget {
   @override
@@ -15,6 +17,9 @@ class _HomePageState extends State<MainPageWidget> {
   final LatLng initialLocation = LatLng(44.17, -81.64);
   final double initialZoom = 13.0;
   late final MapController _mapController;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference coordinates = FirebaseFirestore.instance.collection("coordinates");
+  CollectionReference comments = FirebaseFirestore.instance.collection("comments");
 
   @override
   void initState() {
@@ -37,6 +42,48 @@ class _HomePageState extends State<MainPageWidget> {
   void _onGpsIconPressed(LatLng location) {
     this._mapController.rotate(0);
     this._mapController.move(location, initialZoom);
+  }
+
+  Future<void> addCoordinate() {
+    return coordinates
+        .add({
+          'id': "id",
+          "title": "title",
+          "description": "description",
+          "latitude": 34.0,
+          "longitude": 12.0,
+          "image": 7,
+        })
+        .then((value) => print("Coordinate Added"))
+        .catchError((error) => print("Failed to add coordinate: $error"));
+  }
+
+  Future<void> addComment() {
+    return comments
+        .add({
+          'coordinateId': "coordinateId",
+          "commentId": "commentId",
+          "comment": "comment",
+          "datePosted": DateTime.june,
+        })
+        .then((value) => print("Comment Added"))
+        .catchError((error) => print("Failed to add Comment: $error"));
+  }
+
+  Future<void> getCoordinate() async {
+    print(await readCoordinate());
+  }
+
+  Future<DocumentSnapshot<Object?>> readCoordinate() {
+    //replace DOCUMENT_ID with the var containing the actual id when we add that
+    return FirebaseFirestore.instance.collection('coordinates').doc("DOCUMENT_ID").get().then((DocumentSnapshot documentSnapshot) {
+      //print(documentSnapshot.data());
+      if (documentSnapshot.exists) {
+        print(documentSnapshot.data());
+        return documentSnapshot;
+      }
+      return documentSnapshot;
+    });
   }
 
   // Location button on the top-right
