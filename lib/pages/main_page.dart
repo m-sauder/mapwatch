@@ -5,12 +5,9 @@ import 'package:mapwatch/components/custom_alert_dialog.dart';
 import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
-<<<<<<< HEAD
 import 'package:mapwatch/models/Coordinate.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-=======
->>>>>>> cab732311cb936d4ad34b719fd1d5fd4bb135fe4
 
 class MainPageWidget extends StatefulWidget {
   @override
