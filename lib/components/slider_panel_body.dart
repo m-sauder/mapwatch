@@ -102,9 +102,10 @@ class SliderPanelBody extends HookWidget {
     ];
   }
 
-  void onSubmitSpottingPressed(PanelController pc) async {
+  void onSubmitSpottingPressed(PanelController pc, BuildContext context) async {
     await pc.close();
-    // TODO: Display 'Tap to pin location' alert dialog
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Hold to pin a location on the map!')));
+    context.read(isAddingNewCoordinate).state = true;
   }
 
   @override
@@ -155,7 +156,7 @@ class SliderPanelBody extends HookWidget {
                   style: Constants.mainFont.copyWith(fontSize: 24),
                 ),
                 SizedBox(height: 21),
-                CustomElevatedButton(label: 'Submit a Spotting', onPressed: () => this.onSubmitSpottingPressed(pc)),
+                CustomElevatedButton(label: 'Submit a Spotting', onPressed: () => this.onSubmitSpottingPressed(pc, context)),
                 SizedBox(height: 30),
                 Text(
                   'Submissions Status',

@@ -57,8 +57,10 @@ class SliderPanel extends HookWidget {
   @override
   Widget build(BuildContext context) {
     PanelController _pc = useProvider(panelControllerProvider).state;
+    bool _isAddingNewCoordinate = useProvider(isAddingNewCoordinate).state;
 
     return SlidingUpPanel(
+      isDraggable: !_isAddingNewCoordinate,
       controller: _pc,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(24.0),

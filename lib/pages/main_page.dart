@@ -1,42 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location/flutter_map_location.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mapwatch/components/custom_alert_dialog.dart';
 import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mapwatch/providers/main_providers.dart';
 
-class MainPageWidget extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<MainPageWidget> {
+class MainPageWidget extends HookWidget {
   final LatLng initialLocation = LatLng(44.17, -81.64);
   final double initialZoom = 13.0;
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final CollectionReference coordinates = FirebaseFirestore.instance.collection("coordinates");
+  final CollectionReference comments = FirebaseFirestore.instance.collection("comments");
   late final MapController _mapController;
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
-  CollectionReference coordinates = FirebaseFirestore.instance.collection("coordinates");
-  CollectionReference comments = FirebaseFirestore.instance.collection("comments");
-
-  @override
-  void initState() {
-    super.initState();
-    _mapController = MapController();
-
-    // Load the onboarding dialog on startup
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => CustomAlertDialog(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      );
-    });
-  }
 
   void _onGpsIconPressed(LatLng location) {
     this._mapController.rotate(0);
@@ -129,9 +109,38 @@ class _HomePageState extends State<MainPageWidget> {
     };
   }
 
+  void onMapTap(LatLng tappedLocation, BuildContext context) {
+    // TODO: Load Matthew's tap
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CustomAlertDialog(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
   //UI of the Main Page
   @override
   Widget build(BuildContext context) {
+    bool _isAddingNewCoordinate = useProvider(isAddingNewCoordinate).state;
+
+    // useEffect simulates initState(), which will be called only once during the lifetime of the widget
+    useEffect(() {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) => CustomAlertDialog(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        );
+      });
+    }, []);
+
     return Scaffold(
       body: SliderPanel(
         body: Stack(
@@ -147,6 +156,7 @@ class _HomePageState extends State<MainPageWidget> {
                 plugins: [
                   LocationPlugin(),
                 ],
+                onTap: (location) => this.onMapTap(location, context),
               ),
               layers: [
                 TileLayerOptions(
@@ -155,14 +165,14 @@ class _HomePageState extends State<MainPageWidget> {
                   tileProvider: NonCachingNetworkTileProvider(),
                 ),
                 MarkerLayerOptions(
-                  markers: getMockMarkers(this.initialLocation),
+                  markers: _isAddingNewCoordinate ? [] : getMockMarkers(this.initialLocation),
                 ),
               ],
               nonRotatedLayers: [
                 LocationOptions(
                   locationButton(),
                   onLocationUpdate: (LatLngData? ld) {
-                    print('Location updated: ${ld?.location} (accuracy: ${ld?.accuracy})');
+                    // print('Location updated: ${ld?.location} (accuracy: ${ld?.accuracy})');
                   },
                   onLocationRequested: (LatLngData? ld) {
                     if (ld == null) {
