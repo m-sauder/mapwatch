@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterinit/constants.dart';
-import 'package:flutterinit/pages/login_page.dart';
+import 'package:flutterinit/pages/main_page.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: CustomColorScheme.primaryButton,
       ),
-      home: LoginPageWidget(),
+      home: MainPageWidget(),
       debugShowCheckedModeBanner: false,
     );
   }
