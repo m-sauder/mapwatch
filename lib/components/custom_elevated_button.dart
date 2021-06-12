@@ -15,24 +15,21 @@ class CustomElevatedButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: double.infinity,
-        child: ElevatedButton(
-          onPressed: this.onPressed,
-          child: Text(
-            this.label,
-            style: TextStyle(color: Colors.black),
-          ),
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15)),
-            shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-            backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryButton),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18),
-              ),
+    return Container(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: this.onPressed,
+        child: Text(
+          this.label,
+          style: Constants.mainFont.copyWith(fontWeight: FontWeight.w500, fontSize: 16),
+        ),
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15)),
+          shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+          backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
         ),

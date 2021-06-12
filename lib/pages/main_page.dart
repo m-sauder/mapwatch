@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location/flutter_map_location.dart';
+import 'package:mapwatch/components/custom_alert_dialog.dart';
+import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class MainPageWidget extends StatefulWidget {
   @override
@@ -19,6 +20,18 @@ class _HomePageState extends State<MainPageWidget> {
   void initState() {
     super.initState();
     _mapController = MapController();
+
+    // Load the onboarding dialog on startup
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CustomAlertDialog(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    });
   }
 
   void _onGpsIconPressed(LatLng location) {
@@ -34,33 +47,35 @@ class _HomePageState extends State<MainPageWidget> {
         child: Padding(
           padding: EdgeInsets.only(top: 40, right: 10),
           child: Container(
-            width: 25,
-            height: 25,
-            child: FloatingActionButton(
-              child: ValueListenableBuilder<LocationServiceStatus>(
-                valueListenable: status,
-                builder: (BuildContext context, LocationServiceStatus value, Widget? child) {
-                  switch (value) {
-                    case LocationServiceStatus.disabled:
-                    case LocationServiceStatus.permissionDenied:
-                    case LocationServiceStatus.unsubscribed:
-                      return const Icon(
-                        Icons.location_disabled,
-                        color: Colors.white,
-                        size: 18,
-                      );
-                    default:
-                      return const Icon(
-                        Icons.location_searching,
-                        color: Colors.white,
-                        size: 18,
-                      );
-                  }
-                },
+            height: 120,
+            width: 51,
+            // color: Colors.red,
+            decoration: BoxDecoration(shape: BoxShape.rectangle, color: Colors.white, borderRadius: BorderRadius.circular(15), boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 5,
+                offset: Offset(3, 3), // changes position of shadow
               ),
-              // Execute the default onPressed(), which triggers onLocationRequested()
-              onPressed: () => onPressed(),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            ]),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: () {},
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: Divider(
+                    thickness: 2,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.near_me),
+                  onPressed: () => onPressed(),
+                ),
+              ],
             ),
           ),
         ),
@@ -72,18 +87,7 @@ class _HomePageState extends State<MainPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SlidingUpPanel(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
-        ),
-        backdropEnabled: true,
-        maxHeight: MediaQuery.of(context).size.height - 80,
-        minHeight: 40,
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        panel: Center(
-          child: Text('hey asshole'),
-        ),
+      body: SliderPanel(
         body: Stack(
           children: [
             FlutterMap(
