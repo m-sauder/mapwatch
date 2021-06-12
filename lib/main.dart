@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My App',
       theme: ThemeData(
-        primaryColor: CustomColorScheme.primaryButton,
+        primaryColor: CustomColorScheme.primaryColor,
       ),
       home: MainPageWidget(),
       debugShowCheckedModeBanner: false,
