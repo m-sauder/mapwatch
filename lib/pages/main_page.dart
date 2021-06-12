@@ -110,6 +110,19 @@ class MainPageWidget extends HookWidget {
     };
   }
 
+  void onMapTap(LatLng tappedLocation, BuildContext context) {
+    // TODO: Load Matthew's tap
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) => CustomAlertDialog(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
   //UI of the Main Page
   @override
   Widget build(BuildContext context) {
@@ -144,6 +157,7 @@ class MainPageWidget extends HookWidget {
                 plugins: [
                   LocationPlugin(),
                 ],
+                onTap: (location) => this.onMapTap(location, context),
               ),
               layers: [
                 TileLayerOptions(
@@ -159,7 +173,7 @@ class MainPageWidget extends HookWidget {
                 LocationOptions(
                   locationButton(),
                   onLocationUpdate: (LatLngData? ld) {
-                    print('Location updated: ${ld?.location} (accuracy: ${ld?.accuracy})');
+                    // print('Location updated: ${ld?.location} (accuracy: ${ld?.accuracy})');
                   },
                   onLocationRequested: (LatLngData? ld) {
                     if (ld == null) {
