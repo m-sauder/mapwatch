@@ -40,6 +40,8 @@ dependencies:
     webview_flutter: ^2.0.8
     # for maps inside flutter apps
     flutter_map: ^0.13.1
+    flutter_map_location: ^0.12.0
+    
     # Location paired with maps
     location: ^4.2.0
 
@@ -64,8 +66,8 @@ flutter:
     uses-material-design: true
 
     # To add assets to your application, add an assets section, like this:
-    assets:
-        - images/
+    # assets:
+    #     - images/
 
     # An image asset can refer to one or more resolution-specific "variants", see
     # https://flutter.dev/assets-and-images/#resolution-aware.
