@@ -43,6 +43,9 @@ dependencies:
     # Location paired with maps
     location: ^4.2.0
 
+    # For main page sliding up from bottom
+    sliding_up_panel: ^2.0.0+1
+
     # For navigation bar
     animated_bottom_navigation_bar: ^0.3.2
 
