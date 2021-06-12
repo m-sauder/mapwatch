@@ -143,6 +143,7 @@ class _HomePageState extends State<MainPageWidget> {
                 zoom: this.initialZoom,
                 maxZoom: 18.3,
                 minZoom: 17.0,
+                interactiveFlags: InteractiveFlag.pinchZoom | InteractiveFlag.pinchMove | InteractiveFlag.drag,
                 plugins: [
                   LocationPlugin(),
                 ],
