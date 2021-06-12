@@ -11,24 +11,32 @@ class _HomePageState extends State<MainPageWidget> {
   //UI of the Main Page
   @override
   Widget build(BuildContext context) {
-    return new FlutterMap(
-      options: new MapOptions(
-        center: new LatLng(44.17, -81.64),
-        zoom: 13.0,
-      ),
-      layers: [
-        new TileLayerOptions(urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", subdomains: ['a', 'b', 'c']),
-        new MarkerLayerOptions(
-          markers: [
-            new Marker(
-              width: 80.0,
-              height: 80.0,
-              point: new LatLng(51.5, -0.09),
-              builder: (ctx) => new Container(),
-            ),
-          ],
+    return Scaffold(
+      body: FlutterMap(
+        options: MapOptions(
+          center: LatLng(44.17, -81.64),
+          zoom: 13.0,
+          maxZoom: 18.3,
+          minZoom: 17.0,
         ),
-      ],
+        layers: [
+          TileLayerOptions(
+            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            subdomains: ['a', 'b', 'c'],
+            tileProvider: NonCachingNetworkTileProvider(),
+          ),
+          MarkerLayerOptions(
+            markers: [
+              Marker(
+                width: 80.0,
+                height: 80.0,
+                point: LatLng(51.5, -0.09),
+                builder: (ctx) => Container(),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
