@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_map_location/flutter_map_location.dart';
 import 'package:flutterinit/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -20,9 +21,51 @@ class _HomePageState extends State<MainPageWidget> {
     _mapController = MapController();
   }
 
-  void _onGpsIconPressed() {
+  void _onGpsIconPressed(LatLng location) {
     this._mapController.rotate(0);
-    this._mapController.move(initialLocation, initialZoom);
+    this._mapController.move(location, initialZoom);
+  }
+
+  // Location button on the top-right
+  LocationButtonBuilder locationButton() {
+    return (BuildContext context, ValueNotifier<LocationServiceStatus> status, Function onPressed) {
+      return Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+          padding: EdgeInsets.only(top: 40, right: 10),
+          child: Container(
+            width: 25,
+            height: 25,
+            child: FloatingActionButton(
+              child: ValueListenableBuilder<LocationServiceStatus>(
+                valueListenable: status,
+                builder: (BuildContext context, LocationServiceStatus value, Widget? child) {
+                  switch (value) {
+                    case LocationServiceStatus.disabled:
+                    case LocationServiceStatus.permissionDenied:
+                    case LocationServiceStatus.unsubscribed:
+                      return const Icon(
+                        Icons.location_disabled,
+                        color: Colors.white,
+                        size: 18,
+                      );
+                    default:
+                      return const Icon(
+                        Icons.location_searching,
+                        color: Colors.white,
+                        size: 18,
+                      );
+                  }
+                },
+              ),
+              // Execute the default onPressed(), which triggers onLocationRequested()
+              onPressed: () => onPressed(),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            ),
+          ),
+        ),
+      );
+    };
   }
 
   //UI of the Main Page
@@ -50,6 +93,9 @@ class _HomePageState extends State<MainPageWidget> {
                 zoom: this.initialZoom,
                 maxZoom: 18.3,
                 minZoom: 17.0,
+                plugins: [
+                  LocationPlugin(),
+                ],
               ),
               layers: [
                 TileLayerOptions(
@@ -61,24 +107,21 @@ class _HomePageState extends State<MainPageWidget> {
                   markers: getMockMarkers(this.initialLocation),
                 ),
               ],
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.only(top: 40, right: 10),
-                child: Container(
-                  width: 25,
-                  height: 25,
-                  child: FloatingActionButton(
-                    child: Icon(
-                      Icons.gps_fixed,
-                      size: 18,
-                    ),
-                    onPressed: this._onGpsIconPressed,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  ),
+              nonRotatedLayers: [
+                LocationOptions(
+                  locationButton(),
+                  onLocationUpdate: (LatLngData? ld) {
+                    print('Location updated: ${ld?.location} (accuracy: ${ld?.accuracy})');
+                  },
+                  onLocationRequested: (LatLngData? ld) {
+                    if (ld == null) {
+                      return;
+                    }
+
+                    this._onGpsIconPressed(ld.location);
+                  },
                 ),
-              ),
+              ],
             ),
           ],
         ),
