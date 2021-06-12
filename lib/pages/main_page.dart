@@ -29,20 +29,16 @@ class _HomePageState extends State<MainPageWidget> {
           children: [
             FlutterMap(
               options: MapOptions(
-                center: LatLng(44.17, -81.64),
-                zoom: 13.0,
+                center: LatLng(43.91135, -77.27232),
+                zoom: 17.0,
+                maxZoom: 18.3,
+                minZoom: 17.0,
               ),
               layers: [
-                TileLayerOptions(urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", subdomains: ['a', 'b', 'c']),
-                MarkerLayerOptions(
-                  markers: [
-                    Marker(
-                      width: 80.0,
-                      height: 80.0,
-                      point: LatLng(51.5, -0.09),
-                      builder: (ctx) => Container(),
-                    ),
-                  ],
+                TileLayerOptions(
+                  urlTemplate: "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+                  subdomains: ['a', 'b', 'c'],
+                  tileProvider: NonCachingNetworkTileProvider(),
                 ),
               ],
             ),
