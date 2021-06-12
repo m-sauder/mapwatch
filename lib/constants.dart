@@ -10,6 +10,6 @@ class Constants {
 }
 
 class CustomColorScheme {
-  static final Color primaryColor = Colors.amber.shade600;
+  static final Color primaryColor = Color(0xFF80BE5A);
   static final Color black = Colors.black;
 }
