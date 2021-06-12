@@ -89,12 +89,6 @@ class _HomePageState extends State<MainPageWidget> {
             FlutterMap(
               mapController: this._mapController,
               options: MapOptions(
-<<<<<<< HEAD
-                center: LatLng(43.91135, -77.27232),
-                zoom: 17.0,
-                maxZoom: 18.3,
-                minZoom: 17.0,
-=======
                 center: this.initialLocation,
                 zoom: this.initialZoom,
                 maxZoom: 18.3,
@@ -102,19 +96,15 @@ class _HomePageState extends State<MainPageWidget> {
                 plugins: [
                   LocationPlugin(),
                 ],
->>>>>>> 789706c7181d79c8ebf01cd2333221ac726712c5
               ),
               layers: [
                 TileLayerOptions(
                   urlTemplate: "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
                   subdomains: ['a', 'b', 'c'],
                   tileProvider: NonCachingNetworkTileProvider(),
-<<<<<<< HEAD
-=======
                 ),
                 MarkerLayerOptions(
                   markers: getMockMarkers(this.initialLocation),
->>>>>>> 789706c7181d79c8ebf01cd2333221ac726712c5
                 ),
               ],
               nonRotatedLayers: [
