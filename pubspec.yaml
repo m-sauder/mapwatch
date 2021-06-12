@@ -38,6 +38,10 @@ dependencies:
     url_launcher: ^6.0.6
     # for viewing websites in a webview style
     webview_flutter: ^2.0.8
+    # for maps inside flutter apps
+    flutter_map: ^0.13.1
+    # Location paired with maps
+    location: ^4.2.0
 
     # For navigation bar
     animated_bottom_navigation_bar: ^0.3.2
