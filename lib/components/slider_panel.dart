@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mapwatch/components/slider_panel_body.dart';
+import 'package:mapwatch/providers/main_providers.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
-class SliderPanel extends StatefulWidget {
+class SliderPanel extends HookWidget {
   final Widget body;
 
   SliderPanel({
     required this.body,
   });
 
-  @override
-  _SliderPanelState createState() => _SliderPanelState();
-}
-
-class _SliderPanelState extends State<SliderPanel> {
   Widget _panelBuilder(ScrollController sc) {
     return Stack(
       children: [
@@ -58,7 +56,10 @@ class _SliderPanelState extends State<SliderPanel> {
 
   @override
   Widget build(BuildContext context) {
+    PanelController _pc = useProvider(panelControllerProvider).state;
+
     return SlidingUpPanel(
+      controller: _pc,
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(24.0),
         topRight: Radius.circular(24.0),
@@ -67,7 +68,7 @@ class _SliderPanelState extends State<SliderPanel> {
       maxHeight: MediaQuery.of(context).size.height - 80,
       minHeight: 40,
       margin: EdgeInsets.symmetric(horizontal: 10),
-      body: widget.body,
+      body: body,
       color: Color(0xFFECECEC),
       panelBuilder: this._panelBuilder,
     );
