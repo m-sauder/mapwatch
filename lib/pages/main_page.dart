@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location/flutter_map_location.dart';
 import 'package:mapwatch/components/custom_alert_dialog.dart';
+import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -87,18 +88,7 @@ class _HomePageState extends State<MainPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SlidingUpPanel(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(24.0),
-          topRight: Radius.circular(24.0),
-        ),
-        backdropEnabled: true,
-        maxHeight: MediaQuery.of(context).size.height - 80,
-        minHeight: 40,
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        panel: Center(
-          child: Text('hey asshole'),
-        ),
+      body: SliderPanel(
         body: Stack(
           children: [
             FlutterMap(
