@@ -11,7 +11,7 @@ class MainPageWidget extends StatefulWidget {
 }
 
 class _HomePageState extends State<MainPageWidget> {
-  final LatLng initialLocation = LatLng(44.17, -81.64);
+  final LatLng initialLocation = LatLng(43.9113534, -77.2743354);
   final double initialZoom = 13.0;
   late final MapController _mapController;
 
