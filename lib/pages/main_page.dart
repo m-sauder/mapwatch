@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutterinit/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
@@ -9,6 +10,19 @@ class MainPageWidget extends StatefulWidget {
 }
 
 class _HomePageState extends State<MainPageWidget> {
+  final LatLng initialLocation = LatLng(44.17, -81.64);
+  late final MapController _mapController;
+
+  @override
+  void initState() {
+    super.initState();
+    _mapController = MapController();
+  }
+
+  void _onGpsIconPressed() {
+    this._mapController.rotate(0);
+  }
+
   //UI of the Main Page
   @override
   Widget build(BuildContext context) {
@@ -20,7 +34,7 @@ class _HomePageState extends State<MainPageWidget> {
         ),
         backdropEnabled: true,
         maxHeight: MediaQuery.of(context).size.height - 80,
-        minHeight: 30,
+        minHeight: 40,
         margin: EdgeInsets.symmetric(horizontal: 10),
         panel: Center(
           child: Text('hey asshole'),
@@ -28,21 +42,17 @@ class _HomePageState extends State<MainPageWidget> {
         body: Stack(
           children: [
             FlutterMap(
+              mapController: this._mapController,
               options: MapOptions(
-                center: LatLng(44.17, -81.64),
+                center: this.initialLocation,
                 zoom: 13.0,
+                maxZoom: 18.3,
+                minZoom: 13.0,
               ),
               layers: [
                 TileLayerOptions(urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", subdomains: ['a', 'b', 'c']),
                 MarkerLayerOptions(
-                  markers: [
-                    Marker(
-                      width: 80.0,
-                      height: 80.0,
-                      point: LatLng(51.5, -0.09),
-                      builder: (ctx) => Container(),
-                    ),
-                  ],
+                  markers: getMockMarkers(this.initialLocation),
                 ),
               ],
             ),
@@ -58,7 +68,7 @@ class _HomePageState extends State<MainPageWidget> {
                       Icons.gps_fixed,
                       size: 18,
                     ),
-                    onPressed: () {},
+                    onPressed: this._onGpsIconPressed,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                   ),
                 ),
