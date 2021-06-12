@@ -50,7 +50,11 @@ class _HomePageState extends State<MainPageWidget> {
                 minZoom: 13.0,
               ),
               layers: [
-                TileLayerOptions(urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", subdomains: ['a', 'b', 'c']),
+                TileLayerOptions(
+                  urlTemplate: "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+                  subdomains: ['a', 'b', 'c'],
+                  tileProvider: NonCachingNetworkTileProvider(),
+                ),
                 MarkerLayerOptions(
                   markers: getMockMarkers(this.initialLocation),
                 ),
