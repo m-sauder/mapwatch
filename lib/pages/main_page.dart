@@ -47,7 +47,7 @@ class _HomePageState extends State<MainPageWidget> {
                 center: this.initialLocation,
                 zoom: 13.0,
                 maxZoom: 18.3,
-                minZoom: 13.0,
+                minZoom: 17.0,
               ),
               layers: [
                 TileLayerOptions(
