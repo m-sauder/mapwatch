@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location/flutter_map_location.dart';
+import 'package:mapwatch/components/custom_alert_dialog.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
@@ -19,6 +20,18 @@ class _HomePageState extends State<MainPageWidget> {
   void initState() {
     super.initState();
     _mapController = MapController();
+
+    // Load the onboarding dialog on startup
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CustomAlertDialog(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    });
   }
 
   void _onGpsIconPressed(LatLng location) {

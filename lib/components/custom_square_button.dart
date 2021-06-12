@@ -28,7 +28,7 @@ class CustomSquareButton extends StatelessWidget {
           style: ButtonStyle(
             padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15)),
             shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-            backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryButton),
+            backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
