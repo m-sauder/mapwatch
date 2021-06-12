@@ -8,14 +8,6 @@ class MainPageWidget extends StatefulWidget {
 }
 
 class _HomePageState extends State<MainPageWidget> {
-  int _bottomNavIndex = 1;
-
-  void onBottomNavBarChange(int index) {
-    setState(() {
-      _bottomNavIndex = index;
-    });
-  }
-
   //UI of the Main Page
   @override
   Widget build(BuildContext context) {
