@@ -37,7 +37,7 @@ class _SliderPanelState extends State<SliderPanel> {
               height: 40,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
-                color: Colors.white,
+                color: Color(0xFFECECEC),
               ),
               child: Center(
                 child: Container(
@@ -68,6 +68,7 @@ class _SliderPanelState extends State<SliderPanel> {
       minHeight: 40,
       margin: EdgeInsets.symmetric(horizontal: 10),
       body: widget.body,
+      color: Color(0xFFECECEC),
       panelBuilder: this._panelBuilder,
     );
   }

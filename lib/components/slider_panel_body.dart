@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mapwatch/components/custom_elevated_button.dart';
 import 'package:mapwatch/components/favourite_cards.dart';
 import 'package:mapwatch/components/guide_cards.dart';
+import 'package:mapwatch/components/submission_status_card.dart';
 import 'package:mapwatch/constants.dart';
 
 class SliderPanelBody extends StatefulWidget {
@@ -39,7 +40,7 @@ class _SliderPanelBodyState extends State<SliderPanelBody> {
             height: 80,
             width: 80,
             decoration: BoxDecoration(
-              color: Color(0x55E5E5E5),
+              color: Color(0xFFE5E5E5),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
@@ -75,6 +76,36 @@ class _SliderPanelBodyState extends State<SliderPanelBody> {
         description: 'A guide to spotting turtles, otters and more',
       ),
     ];
+  }
+
+  List<Widget> generateSubmissions() {
+    return [
+      SubmissionStatusCard(
+        title: 'Polar Bear Park',
+        date: 'March 17, 2021',
+        status: 'Approved',
+        statusColor: Color(0xFF80BE5A),
+      ),
+      SizedBox(height: 20),
+      SubmissionStatusCard(
+        title: 'Kincardine Beach',
+        date: 'April 20, 2021',
+        status: 'Under review',
+        statusColor: Color(0xFFDDA15E),
+      ),
+      SizedBox(height: 20),
+      SubmissionStatusCard(
+        title: 'Waterfront Trail',
+        date: 'June 7, 2021',
+        status: 'Pending review',
+        statusColor: Color(0xFF263238),
+      ),
+    ];
+  }
+
+  void onSubmitSpottingPressed() {
+    // TODO: Implement this later
+    // Navigator.pop(context);
   }
 
   @override
@@ -118,13 +149,20 @@ class _SliderPanelBodyState extends State<SliderPanelBody> {
                   ),
                 ),
                 SizedBox(height: 30),
-                CustomElevatedButton(label: 'Submit a Spotting', onPressed: () {}),
+                Text(
+                  'Spotted an animal?',
+                  style: Constants.mainFont.copyWith(fontSize: 24),
+                ),
+                SizedBox(height: 21),
+                CustomElevatedButton(label: 'Submit a Spotting', onPressed: this.onSubmitSpottingPressed),
                 SizedBox(height: 30),
                 Text(
                   'Submissions Status',
                   style: Constants.mainFont.copyWith(fontSize: 24),
                 ),
-                SizedBox(height: 800),
+                SizedBox(height: 21),
+                ...this.generateSubmissions(),
+                SizedBox(height: 100),
               ],
             ),
           ),
