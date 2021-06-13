@@ -199,12 +199,11 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                   ElevatedButton(
                     onPressed: () {
                       widget.onSubmitPressed(new Coordinate(
-                        "",
                         _nameTextController.text.toString(),
                         _descriptionTextController.text.toString(),
-                        0.0,
-                        0.0,
-                        "",
+                        1,
+                        1,
+                        "1",
                       ));
                     },
                     style: ButtonStyle(
