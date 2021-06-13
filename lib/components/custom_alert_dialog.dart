@@ -78,7 +78,7 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> with SingleTicker
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 20, horizontal: 60)),
                 shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.black),
+                backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80),

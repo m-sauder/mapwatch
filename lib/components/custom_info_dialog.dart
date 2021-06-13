@@ -53,6 +53,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
     return ScaleTransition(
       scale: _animation,
       child: AlertDialog(
+        insetPadding: EdgeInsets.all(20),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         titlePadding: EdgeInsets.only(top: 45, left: 23, right: 30, bottom: 5),
         title: Text(
@@ -152,7 +153,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
               ElevatedButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 37)),
+                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 75)),
                   shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
                   backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                   shape: MaterialStateProperty.all(
@@ -175,7 +176,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                   ElevatedButton(
                     onPressed: widget.onCancelPressed,
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 55)),
                       shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
                       backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
                       shape: MaterialStateProperty.all(
@@ -207,7 +208,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                       ));
                     },
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 55)),
                       shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
                       backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                       shape: MaterialStateProperty.all(
