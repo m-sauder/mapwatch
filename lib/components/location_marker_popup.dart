@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mapwatch/constants.dart';
-import 'package:mapwatch/models/coordinate.dart';
 
 class LocationMarkerPopup extends StatefulWidget {
-  final String locationName;
-  final List<Coordinate> animals;
+  final void Function() onCancelPressed;
+
   LocationMarkerPopup({
-    required this.locationName,
-    required this.animals,
+    required this.onCancelPressed,
   });
 
   @override
@@ -90,7 +88,7 @@ class _LocationMarkerPopupState extends State<LocationMarkerPopup>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: widget.onCancelPressed,
                   style: ButtonStyle(
                     padding: MaterialStateProperty.all(
                         EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
