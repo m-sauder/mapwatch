@@ -6,7 +6,7 @@ class Coordinate {
   String description;
   double latitude;
   double longitude;
-  Uint8List image;
+  String image;
 
   Coordinate(
     this.id,

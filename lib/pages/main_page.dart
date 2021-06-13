@@ -10,6 +10,7 @@ import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:mapwatch/models/Coordinate.dart';
 import 'package:mapwatch/providers/main_providers.dart';
 
 class MainPageWidget extends HookWidget {
@@ -25,15 +26,15 @@ class MainPageWidget extends HookWidget {
     this._mapController.move(location, initialZoom);
   }
 
-  Future<void> addCoordinate() {
+  Future<void> addCoordinate(Coordinate coordinate) {
     return coordinates
         .add({
-          'id': "id",
-          "title": "title",
-          "description": "description",
-          "latitude": 34.0,
-          "longitude": 12.0,
-          "image": 7,
+          "coordinateId": coordinate.id,
+          "title": coordinate.title,
+          "description": coordinate.description,
+          "latitude": coordinate.latitude,
+          "longitude": coordinate.longitude,
+          "image": coordinate.image,
         })
         .then((value) => print("Coordinate Added"))
         .catchError((error) => print("Failed to add coordinate: $error"));
@@ -122,7 +123,9 @@ class MainPageWidget extends HookWidget {
             context.read(isAddingNewCoordinate).state = false;
             Navigator.pop(context);
           },
-          onSubmitPressed: () {
+          onSubmitPressed: (Coordinate coordinate) {
+            coordinate.latitude = tappedLocation.latitude;
+            coordinate.longitude = tappedLocation.longitude;
             Navigator.pop(context);
             showDialog(
               context: context,
@@ -134,6 +137,7 @@ class MainPageWidget extends HookWidget {
               ),
             );
             context.read(isAddingNewCoordinate).state = false;
+            addCoordinate(coordinate);
           },
         ),
       );
