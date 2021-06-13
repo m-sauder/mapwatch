@@ -3,9 +3,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location/flutter_map_location.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:mapwatch/components/animal_card.dart';
 import 'package:mapwatch/components/custom_alert_dialog.dart';
 import 'package:mapwatch/components/custom_info_dialog.dart';
 import 'package:mapwatch/components/custom_success_dialog.dart';
+import 'package:mapwatch/components/location_marker_popup.dart';
 import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/components/location_marker.dart' as marker;
 import 'package:latlong2/latlong.dart';
@@ -74,7 +76,23 @@ class MainPageWidget extends HookWidget {
             height: 80.0,
             point: LatLng(coordinate.latitude, coordinate.longitude),
             builder: (ctx) => marker.LocationMarker(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) => LocationMarkerPopup(
+                    locationTitle: 'Prince Edward, ON',
+                    body: Row(
+                      children: [
+                        AnimalCard(
+                          imageUrl: 'images/turtle.png',
+                          title: 'Painted Turtle',
+                          description: 'Slightly rare',
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ));
         });
