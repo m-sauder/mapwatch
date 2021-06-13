@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:core';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LocationMarker extends StatefulWidget {
   final void Function() onPressed;
@@ -17,11 +19,9 @@ class _LocationMarkerState extends State<LocationMarker> {
     return Container(
       height: 10,
       width: 10,
-      child: FloatingActionButton(
-        child: Icon(Icons.pets),
+      child: IconButton(
+        icon: SvgPicture.asset('images/map_pin.svg'),
         onPressed: widget.onPressed,
-        backgroundColor: Colors.green,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
     );
   }
