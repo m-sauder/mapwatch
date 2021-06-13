@@ -82,7 +82,7 @@ class MainPageWidget extends HookWidget {
         // Save to state
         _scaffoldKey.currentState?.context.read(markerList).state = markers;
       });
-    } on Exception catch (e) {
+    } on Exception catch (_) {
       return null;
     }
   }
