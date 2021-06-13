@@ -5,6 +5,7 @@ import 'package:flutter_map_location/flutter_map_location.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mapwatch/components/custom_alert_dialog.dart';
 import 'package:mapwatch/components/custom_info_dialog.dart';
+import 'package:mapwatch/components/custom_success_dialog.dart';
 import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
@@ -122,8 +123,17 @@ class MainPageWidget extends HookWidget {
             Navigator.pop(context);
           },
           onSubmitPressed: () {
-            context.read(isAddingNewCoordinate).state = false;
             Navigator.pop(context);
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => CustomSuccessDialog(
+                onCancelPressed: () {
+                  context.read(isAddingNewCoordinate).state = false;
+                  Navigator.pop(context);
+                },
+              ),
+            );
+            context.read(isAddingNewCoordinate).state = false;
           },
         ),
       );

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:mapwatch/constants.dart';
 
-class CustomInfoDialog extends StatefulWidget {
-  final void Function() onSubmitPressed;
+class CustomSuccessDialog extends StatefulWidget {
   final void Function() onCancelPressed;
 
-  CustomInfoDialog({
-    required this.onSubmitPressed,
+  CustomSuccessDialog({
     required this.onCancelPressed,
   });
 
   @override
-  _CustomInfoDialogState createState() => _CustomInfoDialogState();
+  _CustomSuccessDialogState createState() => _CustomSuccessDialogState();
 }
 
-class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerProviderStateMixin {
+class _CustomSuccessDialogState extends State<CustomSuccessDialog> with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 500),
     vsync: this,
@@ -64,10 +62,11 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
             Icon(
               Icons.check_circle_outline_rounded,
               size: 100,
-              color: Colors.green,
+              color: CustomColorScheme.primaryColor,
             ),
             SizedBox(height: 30),
             RichText(
+              textAlign: TextAlign.center,
               text: TextSpan(
                 style: TextStyle(
                   fontSize: 14.0,
@@ -77,7 +76,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                   TextSpan(text: 'The'),
                   TextSpan(
                     text: ' Ontario Ministry of Natural Resources and Forestry',
-                    style: TextStyle(color: Colors.green),
+                    style: TextStyle(color: CustomColorScheme.primaryColor),
                   ),
                   TextSpan(text: ' will review your submission shortly.'),
                 ],
@@ -85,40 +84,18 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
             ),
             SizedBox(height: 40),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: widget.onSubmitPressed,
+                  onPressed: widget.onCancelPressed,
                   style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
+                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
                     shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                    backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40),
-                        side: BorderSide(color: Colors.green),
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    'New Submission',
-                    style: Constants.mainFont.copyWith(
-                      color: Colors.green,
-                      fontWeight: FontWeight.w200,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-                SizedBox(width: 20),
-                ElevatedButton(
-                  onPressed: widget.onSubmitPressed,
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
-                    shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
-                        side: BorderSide(color: Colors.green),
+                        side: BorderSide(color: CustomColorScheme.primaryColor),
                       ),
                     ),
                   ),
