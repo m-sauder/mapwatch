@@ -199,8 +199,8 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                     onPressed: () {
                       widget.onSubmitPressed(new Coordinate(
                         "",
-                        _nameTextController.value.toString(),
-                        _descriptionTextController.value.toString(),
+                        _nameTextController.text.toString(),
+                        _descriptionTextController.text.toString(),
                         0.0,
                         0.0,
                         "",
