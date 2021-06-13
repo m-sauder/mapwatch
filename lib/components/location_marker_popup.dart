@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mapwatch/constants.dart';
+import 'package:mapwatch/models/coordinate.dart';
 
-class CustomSuccessDialog extends StatefulWidget {
-  final void Function() onCancelPressed;
-
-  CustomSuccessDialog({
-    required this.onCancelPressed,
+class LocationMarkerPopup extends StatefulWidget {
+  final String locationName;
+  final List<Coordinate> animals;
+  LocationMarkerPopup({
+    required this.locationName,
+    required this.animals,
   });
 
   @override
-  _CustomSuccessDialogState createState() => _CustomSuccessDialogState();
+  _LocationMarkerPopupState createState() => _LocationMarkerPopupState();
 }
 
-class _CustomSuccessDialogState extends State<CustomSuccessDialog>
+class _LocationMarkerPopupState extends State<LocationMarkerPopup>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 500),
@@ -87,30 +89,27 @@ class _CustomSuccessDialogState extends State<CustomSuccessDialog>
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: widget.onCancelPressed,
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
-                      shadowColor:
-                          MaterialStateProperty.all<Color>(Colors.transparent),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          CustomColorScheme.primaryColor),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                          side:
-                              BorderSide(color: CustomColorScheme.primaryColor),
-                        ),
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ButtonStyle(
+                    padding: MaterialStateProperty.all(
+                        EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
+                    shadowColor:
+                        MaterialStateProperty.all<Color>(Colors.transparent),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        CustomColorScheme.primaryColor),
+                    shape: MaterialStateProperty.all(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(40),
+                        side: BorderSide(color: CustomColorScheme.primaryColor),
                       ),
                     ),
-                    child: Text(
-                      'Finish',
-                      style: Constants.mainFont.copyWith(
-                        fontWeight: FontWeight.w200,
-                        fontSize: 15,
-                      ),
+                  ),
+                  child: Text(
+                    'Finish',
+                    style: Constants.mainFont.copyWith(
+                      fontWeight: FontWeight.w200,
+                      fontSize: 15,
                     ),
                   ),
                 ),
