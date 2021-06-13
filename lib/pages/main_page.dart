@@ -78,7 +78,7 @@ class MainPageWidget extends HookWidget {
             builder: (ctx) => marker.LocationMarker(
               onPressed: () {
                 showDialog(
-                  context: context,
+                  context: _scaffoldKey.currentState!.context,
                   builder: (BuildContext context) => LocationMarkerPopup(
                     locationTitle: 'Prince Edward, ON',
                     body: Row(
@@ -149,7 +149,8 @@ class MainPageWidget extends HookWidget {
     };
   }
 
-  void onMapTap(LatLng tappedLocation, BuildContext context) {
+  void onMapTap(LatLng tappedLocation) {
+    var context = _scaffoldKey.currentState!.context;
     bool _isAddingNewCoordinate = context.read(isAddingNewCoordinate).state;
 
     if (_isAddingNewCoordinate) {
@@ -222,7 +223,7 @@ class MainPageWidget extends HookWidget {
                 plugins: [
                   LocationPlugin(),
                 ],
-                onTap: (location) => this.onMapTap(location, context),
+                onTap: (location) => this.onMapTap(location),
               ),
               layers: [
                 TileLayerOptions(
