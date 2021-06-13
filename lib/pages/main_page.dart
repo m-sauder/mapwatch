@@ -16,7 +16,7 @@ class MainPageWidget extends HookWidget {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final CollectionReference coordinates = FirebaseFirestore.instance.collection("coordinates");
   final CollectionReference comments = FirebaseFirestore.instance.collection("comments");
-  late final MapController _mapController;
+  final MapController _mapController = MapController();
 
   void _onGpsIconPressed(LatLng location) {
     this._mapController.rotate(0);
