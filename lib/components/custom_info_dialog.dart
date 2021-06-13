@@ -71,18 +71,79 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                     TextSpan(text: 'Based on the location, your input will be sent to the'),
                     TextSpan(
                       text: ' Ontario Ministry of Natural Resources and Forestry',
-                      style: TextStyle(color: Colors.green),
+                      style: TextStyle(color: CustomColorScheme.primaryColor),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 30),
+              TextField(
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: CustomColorScheme.primaryColor),
+                  ),
+                  labelText: 'Animal',
+                  fillColor: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                maxLines: 3,
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: CustomColorScheme.primaryColor),
+                  ),
+                  labelText: 'Description',
+                  fillColor: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: CustomColorScheme.primaryColor),
+                  ),
+                  labelText: 'Full Name',
+                  fillColor: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: CustomColorScheme.primaryColor),
+                  ),
+                  labelText: 'Email',
+                  fillColor: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 20),
+              TextField(
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: CustomColorScheme.primaryColor),
+                  ),
+                  labelText: 'Phone Number',
+                  fillColor: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 20),
               ElevatedButton(
-                onPressed: widget.onSubmitPressed,
+                onPressed: () {},
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 37)),
                   shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                  backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -98,71 +159,10 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                 ),
               ),
               SizedBox(height: 20),
-              TextField(
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.green),
-                  ),
-                  labelText: 'Animal',
-                  fillColor: Colors.grey,
-                ),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                maxLines: 3,
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.green),
-                  ),
-                  labelText: 'Description',
-                  fillColor: Colors.grey,
-                ),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.green),
-                  ),
-                  labelText: 'Full Name',
-                  fillColor: Colors.grey,
-                ),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.green),
-                  ),
-                  labelText: 'Email',
-                  fillColor: Colors.grey,
-                ),
-              ),
-              SizedBox(height: 20),
-              TextField(
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.green),
-                  ),
-                  labelText: 'Phone Number',
-                  fillColor: Colors.grey,
-                ),
-              ),
-              SizedBox(height: 20),
               Row(
                 children: [
                   ElevatedButton(
-                    onPressed: widget.onSubmitPressed,
+                    onPressed: widget.onCancelPressed,
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
                       shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
@@ -170,7 +170,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
-                          side: BorderSide(color: Colors.green),
+                          side: BorderSide(color: CustomColorScheme.primaryColor),
                         ),
                       ),
                     ),
@@ -189,11 +189,11 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
                       shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                      backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
-                          side: BorderSide(color: Colors.green),
+                          side: BorderSide(color: CustomColorScheme.primaryColor),
                         ),
                       ),
                     ),
