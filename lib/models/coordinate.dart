@@ -1,12 +1,10 @@
-import 'dart:typed_data';
-
 class Coordinate {
   String id;
   String title;
   String description;
   double latitude;
   double longitude;
-  Uint8List image;
+  String image;
 
   Coordinate(
     this.id,

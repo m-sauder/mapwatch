@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mapwatch/constants.dart';
+import 'package:mapwatch/models/coordinate.dart';
 
 class CustomInfoDialog extends StatefulWidget {
-  final void Function() onSubmitPressed;
+  final void Function(Coordinate) onSubmitPressed;
   final void Function() onCancelPressed;
 
   CustomInfoDialog({
@@ -15,6 +16,11 @@ class CustomInfoDialog extends StatefulWidget {
 }
 
 class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerProviderStateMixin {
+  final TextEditingController _nameTextController = TextEditingController();
+  final TextEditingController _descriptionTextController = TextEditingController();
+  final TextEditingController _animalTextController = TextEditingController();
+  final TextEditingController _phoneTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 500),
     vsync: this,
@@ -79,6 +85,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
               ),
               SizedBox(height: 30),
               TextField(
+                controller: _animalTextController,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -91,6 +98,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
               ),
               SizedBox(height: 20),
               TextField(
+                controller: _descriptionTextController,
                 maxLines: 3,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
@@ -104,6 +112,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
               ),
               SizedBox(height: 20),
               TextField(
+                controller: _nameTextController,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -116,6 +125,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
               ),
               SizedBox(height: 20),
               TextField(
+                controller: _emailTextController,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -128,6 +138,7 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
               ),
               SizedBox(height: 20),
               TextField(
+                controller: _phoneTextController,
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -186,7 +197,16 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                   ),
                   SizedBox(width: 20),
                   ElevatedButton(
-                    onPressed: widget.onSubmitPressed,
+                    onPressed: () {
+                      widget.onSubmitPressed(new Coordinate(
+                        "",
+                        _nameTextController.text.toString(),
+                        _descriptionTextController.text.toString(),
+                        0.0,
+                        0.0,
+                        "",
+                      ));
+                    },
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 55)),
                       shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
