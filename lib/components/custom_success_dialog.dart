@@ -87,10 +87,34 @@ class _CustomSuccessDialogState extends State<CustomSuccessDialog> with SingleTi
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
+                  child: TextButton(
+                    onPressed: widget.onCancelPressed,
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 0)),
+                      shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                          side: BorderSide(color: CustomColorScheme.primaryColor),
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      'New Submission',
+                      style: Constants.mainFont.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14,
+                        color: CustomColorScheme.primaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
                   child: ElevatedButton(
                     onPressed: widget.onCancelPressed,
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 0)),
                       shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
                       backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                       shape: MaterialStateProperty.all(
@@ -103,7 +127,7 @@ class _CustomSuccessDialogState extends State<CustomSuccessDialog> with SingleTi
                     child: Text(
                       'Finish',
                       style: Constants.mainFont.copyWith(
-                        fontWeight: FontWeight.w200,
+                        fontWeight: FontWeight.w600,
                         fontSize: 15,
                       ),
                     ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mapwatch/components/custom_elevated_button.dart';
 import 'package:mapwatch/components/favourite_cards.dart';
@@ -121,6 +122,11 @@ class SliderPanelBody extends HookWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Container(
+                  child: SvgPicture.asset('images/search_bar.svg'),
+                  width: double.infinity,
+                ),
+                SizedBox(height: 21),
                 Text(
                   'Favourites',
                   style: Constants.mainFont.copyWith(fontSize: 24),
