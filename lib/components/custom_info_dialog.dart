@@ -77,27 +77,6 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                 ),
               ),
               SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: widget.onSubmitPressed,
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 37)),
-                  shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  'Upload a Photo (Optional)',
-                  style: Constants.mainFont.copyWith(
-                    fontWeight: FontWeight.w200,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
               TextField(
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
@@ -156,6 +135,27 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                   ),
                   labelText: 'Phone Number',
                   fillColor: Colors.grey,
+                ),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: widget.onSubmitPressed,
+                style: ButtonStyle(
+                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 37)),
+                  shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+                  shape: MaterialStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  'Upload a Photo (Optional)',
+                  style: Constants.mainFont.copyWith(
+                    fontWeight: FontWeight.w200,
+                    fontSize: 15,
+                  ),
                 ),
               ),
               SizedBox(height: 20),

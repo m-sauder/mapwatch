@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location/flutter_map_location.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mapwatch/components/custom_alert_dialog.dart';
+import 'package:mapwatch/components/custom_info_dialog.dart';
 import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
@@ -16,7 +17,7 @@ class MainPageWidget extends HookWidget {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final CollectionReference coordinates = FirebaseFirestore.instance.collection("coordinates");
   final CollectionReference comments = FirebaseFirestore.instance.collection("comments");
-  late final MapController _mapController;
+  final MapController _mapController = MapController();
 
   void _onGpsIconPressed(LatLng location) {
     this._mapController.rotate(0);
@@ -110,16 +111,23 @@ class MainPageWidget extends HookWidget {
   }
 
   void onMapTap(LatLng tappedLocation, BuildContext context) {
-    // TODO: Load Matthew's tap
+    bool _isAddingNewCoordinate = context.read(isAddingNewCoordinate).state;
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => CustomAlertDialog(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-    );
+    if (_isAddingNewCoordinate) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => CustomInfoDialog(
+          onCancelPressed: () {
+            context.read(isAddingNewCoordinate).state = false;
+            Navigator.pop(context);
+          },
+          onSubmitPressed: () {
+            context.read(isAddingNewCoordinate).state = false;
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }
   }
 
   //UI of the Main Page
