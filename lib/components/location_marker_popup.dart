@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:mapwatch/constants.dart';
 
 class LocationMarkerPopup extends StatefulWidget {
-  final void Function() onCancelPressed;
+  final String locationTitle;
+  final Widget body;
 
   LocationMarkerPopup({
-    required this.onCancelPressed,
+    required this.locationTitle,
+    required this.body,
   });
 
   @override
@@ -14,7 +16,7 @@ class LocationMarkerPopup extends StatefulWidget {
 
 class _LocationMarkerPopupState extends State<LocationMarkerPopup> with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(milliseconds: 500),
+    duration: const Duration(milliseconds: 200),
     vsync: this,
   );
 
@@ -46,70 +48,33 @@ class _LocationMarkerPopupState extends State<LocationMarkerPopup> with SingleTi
       scale: _animation,
       child: AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        titlePadding: EdgeInsets.only(top: 45, left: 23, right: 30, bottom: 5),
+        titlePadding: EdgeInsets.only(top: 20, left: 23, right: 30, bottom: 0),
         title: Text(
-          'Success!',
-          textAlign: TextAlign.center,
+          widget.locationTitle,
+          textAlign: TextAlign.left,
           style: Constants.mainFont.copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 24,
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
           ),
         ),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.check_circle_outline_rounded,
-              size: 100,
-              color: CustomColorScheme.primaryColor,
-            ),
-            SizedBox(height: 30),
-            RichText(
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                style: TextStyle(
-                  fontSize: 14.0,
-                  color: Colors.black,
+        content: Container(
+          width: 400,
+          height: 160,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Animals found here:',
+                textAlign: TextAlign.left,
+                style: Constants.mainFont.copyWith(
+                  fontSize: 12,
                 ),
-                children: <TextSpan>[
-                  TextSpan(text: 'The'),
-                  TextSpan(
-                    text: ' Ontario Ministry of Natural Resources and Forestry',
-                    style: TextStyle(color: CustomColorScheme.primaryColor),
-                  ),
-                  TextSpan(text: ' will review your submission shortly.'),
-                ],
               ),
-            ),
-            SizedBox(height: 40),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: widget.onCancelPressed,
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
-                    shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                    backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
-                        side: BorderSide(color: CustomColorScheme.primaryColor),
-                      ),
-                    ),
-                  ),
-                  child: Text(
-                    'Finish',
-                    style: Constants.mainFont.copyWith(
-                      fontWeight: FontWeight.w200,
-                      fontSize: 15,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+              SizedBox(height: 10),
+              widget.body
+            ],
+          ),
         ),
       ),
     );
