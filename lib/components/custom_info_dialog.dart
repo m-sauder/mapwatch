@@ -150,78 +150,88 @@ class _CustomInfoDialogState extends State<CustomInfoDialog> with SingleTickerPr
                 ),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 75)),
-                  shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                  backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
-                  shape: MaterialStateProperty.all(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 37)),
+                        shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                        backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'Upload a Photo (Optional)',
+                        style: Constants.mainFont.copyWith(
+                          fontWeight: FontWeight.w200,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                child: Text(
-                  'Upload a Photo (Optional)',
-                  style: Constants.mainFont.copyWith(
-                    fontWeight: FontWeight.w200,
-                    fontSize: 15,
-                  ),
-                ),
+                ],
               ),
               SizedBox(height: 20),
               Row(
                 children: [
-                  ElevatedButton(
-                    onPressed: widget.onCancelPressed,
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 55)),
-                      shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                      backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                          side: BorderSide(color: CustomColorScheme.primaryColor),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: widget.onCancelPressed,
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
+                        shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            side: BorderSide(color: CustomColorScheme.primaryColor),
+                          ),
                         ),
                       ),
-                    ),
-                    child: Text(
-                      'Cancel',
-                      style: Constants.mainFont.copyWith(
-                        color: Colors.green,
-                        fontWeight: FontWeight.w200,
-                        fontSize: 15,
+                      child: Text(
+                        'Cancel',
+                        style: Constants.mainFont.copyWith(
+                          color: Colors.green,
+                          fontWeight: FontWeight.w200,
+                          fontSize: 15,
+                        ),
                       ),
                     ),
                   ),
                   SizedBox(width: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      widget.onSubmitPressed(new Coordinate(
-                        _nameTextController.text.toString(),
-                        _descriptionTextController.text.toString(),
-                        1,
-                        1,
-                        "1",
-                      ));
-                    },
-                    style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 55)),
-                      shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                      backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(40),
-                          side: BorderSide(color: CustomColorScheme.primaryColor),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        widget.onSubmitPressed(new Coordinate(
+                          _nameTextController.text.toString(),
+                          _descriptionTextController.text.toString(),
+                          1.0,
+                          1.0,
+                          "1",
+                        ));
+                      },
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 35)),
+                        shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                        backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                            side: BorderSide(color: CustomColorScheme.primaryColor),
+                          ),
                         ),
                       ),
-                    ),
-                    child: Text(
-                      'Submit',
-                      style: Constants.mainFont.copyWith(
-                        fontWeight: FontWeight.w200,
-                        fontSize: 15,
+                      child: Text(
+                        'Submit',
+                        style: Constants.mainFont.copyWith(
+                          fontWeight: FontWeight.w200,
+                          fontSize: 15,
+                        ),
                       ),
                     ),
                   ),

@@ -86,24 +86,26 @@ class _CustomSuccessDialogState extends State<CustomSuccessDialog> with SingleTi
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
-                  onPressed: widget.onCancelPressed,
-                  style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
-                    shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                    backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
-                    shape: MaterialStateProperty.all(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
-                        side: BorderSide(color: CustomColorScheme.primaryColor),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: widget.onCancelPressed,
+                    style: ButtonStyle(
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
+                      shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                      backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40),
+                          side: BorderSide(color: CustomColorScheme.primaryColor),
+                        ),
                       ),
                     ),
-                  ),
-                  child: Text(
-                    'Finish',
-                    style: Constants.mainFont.copyWith(
-                      fontWeight: FontWeight.w200,
-                      fontSize: 15,
+                    child: Text(
+                      'Finish',
+                      style: Constants.mainFont.copyWith(
+                        fontWeight: FontWeight.w200,
+                        fontSize: 15,
+                      ),
                     ),
                   ),
                 ),
