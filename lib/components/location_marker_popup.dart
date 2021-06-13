@@ -12,7 +12,8 @@ class LocationMarkerPopup extends StatefulWidget {
   _LocationMarkerPopupState createState() => _LocationMarkerPopupState();
 }
 
-class _LocationMarkerPopupState extends State<LocationMarkerPopup> with SingleTickerProviderStateMixin {
+class _LocationMarkerPopupState extends State<LocationMarkerPopup>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 500),
     vsync: this,
@@ -89,9 +90,12 @@ class _LocationMarkerPopupState extends State<LocationMarkerPopup> with SingleTi
                 ElevatedButton(
                   onPressed: widget.onCancelPressed,
                   style: ButtonStyle(
-                    padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
-                    shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
-                    backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
+                    padding: MaterialStateProperty.all(
+                        EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
+                    shadowColor:
+                        MaterialStateProperty.all<Color>(Colors.transparent),
+                    backgroundColor: MaterialStateProperty.all<Color>(
+                        CustomColorScheme.primaryColor),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(40),
