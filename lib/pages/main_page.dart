@@ -10,7 +10,7 @@ import 'package:mapwatch/components/slider_panel.dart';
 import 'package:mapwatch/mocks/markers_mock.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mapwatch/models/Coordinate.dart';
+import 'package:mapwatch/models/coordinate.dart';
 import 'package:mapwatch/providers/main_providers.dart';
 
 class MainPageWidget extends HookWidget {

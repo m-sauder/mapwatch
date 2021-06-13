@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mapwatch/constants.dart';
-import 'package:mapwatch/models/Coordinate.dart';
+import 'package:mapwatch/models/coordinate.dart';
 
 class CustomInfoDialog extends StatefulWidget {
   final void Function(Coordinate) onSubmitPressed;
