@@ -64,7 +64,7 @@ class MainPageWidget extends HookWidget {
   }
 
   Future<void> getAllCoordinates(BuildContext context) async {
-    //replace DOCUMENT_ID with the var containing the actual id when we add that
+    //replace DOCUMENT_ID with the var containing the actual id when we addd that
     try {
       return await FirebaseFirestore.instance.collection('coordinates').get().then((QuerySnapshot querySnapshot) {
         List<Marker> markers = [];
