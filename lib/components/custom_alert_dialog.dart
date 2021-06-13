@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mapwatch/constants.dart';
 
 class CustomAlertDialog extends StatefulWidget {
@@ -45,6 +46,7 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> with SingleTicker
     return ScaleTransition(
       scale: _animation,
       child: AlertDialog(
+        insetPadding: EdgeInsets.all(5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         titlePadding: EdgeInsets.only(top: 45, left: 30, right: 30, bottom: 5),
         title: Text(
@@ -57,6 +59,8 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> with SingleTicker
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            SvgPicture.asset('images/map_pin.svg'),
+            SizedBox(height: 25),
             Text(
               'Remember:',
               style: Constants.mainFont.copyWith(
@@ -69,14 +73,14 @@ class _CustomAlertDialogState extends State<CustomAlertDialog> with SingleTicker
               'Leave nothing but footprints',
               style: Constants.mainFont.copyWith(
                 fontWeight: FontWeight.normal,
-                fontSize: 16,
+                fontSize: 20,
               ),
             ),
             SizedBox(height: 30),
             ElevatedButton(
               onPressed: widget.onPressed,
               style: ButtonStyle(
-                padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 20, horizontal: 60)),
+                padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 80)),
                 shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
                 backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                 shape: MaterialStateProperty.all(
