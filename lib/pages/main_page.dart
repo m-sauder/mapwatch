@@ -53,18 +53,17 @@ class MainPageWidget extends HookWidget {
   }
 
   Future<void> getCoordinate() async {
-    print(await readCoordinate());
+    QuerySnapshot query = await readCoordinate();
+    query.docs.forEach((doc) {
+      print(doc.id);
+    });
   }
 
-  Future<DocumentSnapshot<Object?>> readCoordinate() {
+  Future<QuerySnapshot> readCoordinate() {
     //replace DOCUMENT_ID with the var containing the actual id when we add that
-    return FirebaseFirestore.instance.collection('coordinates').doc("DOCUMENT_ID").get().then((DocumentSnapshot documentSnapshot) {
+    return FirebaseFirestore.instance.collection('coordinates').get().then((QuerySnapshot querySnapshot) {
       //print(documentSnapshot.data());
-      if (documentSnapshot.exists) {
-        print(documentSnapshot.data());
-        return documentSnapshot;
-      }
-      return documentSnapshot;
+      return querySnapshot;
     });
   }
 
