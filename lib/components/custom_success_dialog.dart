@@ -12,8 +12,7 @@ class CustomSuccessDialog extends StatefulWidget {
   _CustomSuccessDialogState createState() => _CustomSuccessDialogState();
 }
 
-class _CustomSuccessDialogState extends State<CustomSuccessDialog>
-    with SingleTickerProviderStateMixin {
+class _CustomSuccessDialogState extends State<CustomSuccessDialog> with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     duration: const Duration(milliseconds: 500),
     vsync: this,
@@ -91,17 +90,13 @@ class _CustomSuccessDialogState extends State<CustomSuccessDialog>
                   child: ElevatedButton(
                     onPressed: widget.onCancelPressed,
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
-                      shadowColor:
-                          MaterialStateProperty.all<Color>(Colors.transparent),
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          CustomColorScheme.primaryColor),
+                      padding: MaterialStateProperty.all(EdgeInsets.symmetric(vertical: 15, horizontal: 105)),
+                      shadowColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                      backgroundColor: MaterialStateProperty.all<Color>(CustomColorScheme.primaryColor),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(40),
-                          side:
-                              BorderSide(color: CustomColorScheme.primaryColor),
+                          side: BorderSide(color: CustomColorScheme.primaryColor),
                         ),
                       ),
                     ),

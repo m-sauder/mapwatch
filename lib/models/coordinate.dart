@@ -1,5 +1,4 @@
 class Coordinate {
-  String id;
   String title;
   String description;
   double latitude;
@@ -7,7 +6,6 @@ class Coordinate {
   String image;
 
   Coordinate(
-    this.id,
     this.title,
     this.description,
     this.latitude,
@@ -16,15 +14,13 @@ class Coordinate {
   );
 
   Coordinate.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        title = json['title'],
+      : title = json['title'],
         description = json['description'],
         latitude = json['latitude'],
         longitude = json['longitude'],
         image = json['image'];
 
   Map<String, dynamic> toJson() => {
-        'id': id,
         'title': title,
         'description': description,
         'latitude': latitude,

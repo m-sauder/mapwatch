@@ -7,7 +7,7 @@ import 'package:mapwatch/components/custom_alert_dialog.dart';
 import 'package:mapwatch/components/custom_info_dialog.dart';
 import 'package:mapwatch/components/custom_success_dialog.dart';
 import 'package:mapwatch/components/slider_panel.dart';
-import 'package:mapwatch/mocks/markers_mock.dart';
+import 'package:mapwatch/components/location_marker.dart' as marker;
 import 'package:latlong2/latlong.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mapwatch/models/coordinate.dart';
@@ -20,6 +20,7 @@ class MainPageWidget extends HookWidget {
   final CollectionReference coordinates = FirebaseFirestore.instance.collection("coordinates");
   final CollectionReference comments = FirebaseFirestore.instance.collection("comments");
   final MapController _mapController = MapController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   void _onGpsIconPressed(LatLng location) {
     this._mapController.rotate(0);
@@ -29,7 +30,6 @@ class MainPageWidget extends HookWidget {
   Future<void> addCoordinate(Coordinate coordinate) {
     return coordinates
         .add({
-          "coordinateId": coordinate.id,
           "title": coordinate.title,
           "description": coordinate.description,
           "latitude": coordinate.latitude,
@@ -53,19 +53,38 @@ class MainPageWidget extends HookWidget {
   }
 
   Future<void> getCoordinate() async {
-    print(await readCoordinate());
-  }
-
-  Future<DocumentSnapshot<Object?>> readCoordinate() {
     //replace DOCUMENT_ID with the var containing the actual id when we add that
     return FirebaseFirestore.instance.collection('coordinates').doc("DOCUMENT_ID").get().then((DocumentSnapshot documentSnapshot) {
-      //print(documentSnapshot.data());
       if (documentSnapshot.exists) {
         print(documentSnapshot.data());
-        return documentSnapshot;
       }
-      return documentSnapshot;
     });
+  }
+
+  Future<void> getAllCoordinates(BuildContext context) async {
+    //replace DOCUMENT_ID with the var containing the actual id when we add that
+    try {
+      return await FirebaseFirestore.instance.collection('coordinates').get().then((QuerySnapshot querySnapshot) {
+        List<Marker> markers = [];
+
+        querySnapshot.docs.forEach((doc) {
+          var coordinate = Coordinate.fromJson(doc.data() as Map<String, dynamic>);
+          markers.add(Marker(
+            width: 80.0,
+            height: 80.0,
+            point: LatLng(coordinate.latitude, coordinate.longitude),
+            builder: (ctx) => marker.LocationMarker(
+              onPressed: () {},
+            ),
+          ));
+        });
+
+        // Save to state
+        _scaffoldKey.currentState?.context.read(markerList).state = markers;
+      });
+    } on Exception catch (_) {
+      return null;
+    }
   }
 
   // Location button on the top-right
@@ -123,21 +142,23 @@ class MainPageWidget extends HookWidget {
             context.read(isAddingNewCoordinate).state = false;
             Navigator.pop(context);
           },
-          onSubmitPressed: (Coordinate coordinate) {
+          onSubmitPressed: (Coordinate coordinate) async {
             coordinate.latitude = tappedLocation.latitude;
             coordinate.longitude = tappedLocation.longitude;
             Navigator.pop(context);
             showDialog(
               context: context,
               builder: (BuildContext context) => CustomSuccessDialog(
-                onCancelPressed: () {
+                onCancelPressed: () async {
                   context.read(isAddingNewCoordinate).state = false;
                   Navigator.pop(context);
+
+                  await addCoordinate(coordinate);
+                  await getAllCoordinates(context);
                 },
               ),
             );
             context.read(isAddingNewCoordinate).state = false;
-            addCoordinate(coordinate);
           },
         ),
       );
@@ -148,6 +169,7 @@ class MainPageWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     bool _isAddingNewCoordinate = useProvider(isAddingNewCoordinate).state;
+    List<Marker> _markerList = useProvider(markerList).state;
 
     // useEffect simulates initState(), which will be called only once during the lifetime of the widget
     useEffect(() {
@@ -161,9 +183,13 @@ class MainPageWidget extends HookWidget {
           ),
         );
       });
+
+      // Get coordinates
+      getAllCoordinates(context);
     }, []);
 
     return Scaffold(
+      key: _scaffoldKey,
       body: SliderPanel(
         body: Stack(
           children: [
@@ -187,7 +213,7 @@ class MainPageWidget extends HookWidget {
                   tileProvider: NonCachingNetworkTileProvider(),
                 ),
                 MarkerLayerOptions(
-                  markers: _isAddingNewCoordinate ? [] : getMockMarkers(this.initialLocation),
+                  markers: _isAddingNewCoordinate ? [] : _markerList,
                 ),
               ],
               nonRotatedLayers: [
